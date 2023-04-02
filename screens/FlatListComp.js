@@ -12,7 +12,7 @@ import {
 import { ListItem, Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons'
 
-class App extends PureComponent {
+class FlatListComp extends PureComponent {
 
   constructor(props){
     super(props);
@@ -71,4 +71,4 @@ class App extends PureComponent {
   }
 }
 
-export default App;
+export default FlatListComp;

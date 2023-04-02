@@ -4,11 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import LowPriority from './screens/LowPriority';
-import Instructions from './screens/Instructions.js'
+
 
 
 import DemoFunComponent from  './screens/DemoFunComponent.js'
+import FlatListComp from  './screens/FlatListComp.js'
 
 
 function DetailsScreen() {
@@ -48,7 +48,7 @@ const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={DemoFunComponent} />
+      <HomeStack.Screen name="Home" component={FlatListComp} />
       <HomeStack.Screen name="Details" component={DetailsScreen} />
     </HomeStack.Navigator>
   );
@@ -73,6 +73,7 @@ export default function App() {
       <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        
       </Tab.Navigator>
     </NavigationContainer>
   );
