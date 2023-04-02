@@ -1,74 +1,72 @@
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import React, { PureComponent } from 'react';
-import {
-  StatusBar,
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  TouchableOpacity,
-  FlatList
-} from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons'
-
-class App extends PureComponent {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      data: []
-    }
-  }
-
-
-  fetchItem() {
-      requestAnimationFrame(() =>
-        fetch(`https://catfact.ninja/breeds`, {
-          method: 'GET',
-        })
-          .then(response => response.json())
-          .then(responseJson => {
-            this.setState({data: responseJson.data})
-             console.warn(responseJson);
-          })
-          .catch(error => {
-            {
-              alert(error)
-            }
-          }),
-      );
-  }
-
-
-  renderCats = ({item}) => (
-    <View style={{marginTop: 0}}>
-    <ListItem bottomDivider containerStyle={{ backgroundColor: '#fbb03c' }}>
-    <Avatar rounded large source={{uri: 'https://cdn-prod.medicalnewstoday.com/content/images/articles/322/322868/golden-retriever-puppy.jpg'}} height={36} width={36} />
-     <ListItem.Content>
-       <ListItem.Title style={{color:'black', fontSize: 18}}>{item.breed.toUpperCase()}</ListItem.Title>
-       <ListItem.Subtitle style={{color: 'black'}}>{item.country}</ListItem.Subtitle>
-     </ListItem.Content>
-   </ListItem>
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Details!</Text>
     </View>
   );
-
-
-  componentDidMount(){
-    this.fetchItem()
-  }
-
-  render(){
-    return(
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#fbb03c' }}>
-      <FlatList
-        removeClippedSubviews={true}
-        data={this.state.data}
-        renderItem={item => this.renderCats(item)}
-      />
-    </SafeAreaView>
-      )
-  }
 }
 
-export default App;
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+function SettingsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Details" component={DetailsScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
+const SettingsStack = createNativeStackNavigator();
+
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="Details" component={DetailsScreen} />
+    </SettingsStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
