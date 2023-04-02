@@ -5,10 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import LowPriority from './screens/LowPriority';
-import Instructions from './screens/Instructions.js'
-
-
-import DemoFunComponent from  './screens/DemoFunComponent.js'
 
 
 function DetailsScreen() {
@@ -48,7 +44,7 @@ const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={DemoFunComponent} />
+      <HomeStack.Screen name="Home" component={HomeScreen} />
       <HomeStack.Screen name="Details" component={DetailsScreen} />
     </HomeStack.Navigator>
   );
