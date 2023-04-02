@@ -1,20 +1,74 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+import React, { PureComponent } from 'react';
+import {
+  StatusBar,
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList
+} from 'react-native';
+import { ListItem, Avatar } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Ionicons'
+
+class App extends PureComponent {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      data: []
+    }
+  }
+
+
+  fetchItem() {
+      requestAnimationFrame(() =>
+        fetch(`https://catfact.ninja/breeds`, {
+          method: 'GET',
+        })
+          .then(response => response.json())
+          .then(responseJson => {
+            this.setState({data: responseJson.data})
+             console.warn(responseJson);
+          })
+          .catch(error => {
+            {
+              alert(error)
+            }
+          }),
+      );
+  }
+
+
+  renderCats = ({item}) => (
+    <View style={{marginTop: 0}}>
+    <ListItem bottomDivider containerStyle={{ backgroundColor: '#fbb03c' }}>
+    <Avatar rounded large source={{uri: 'https://cdn-prod.medicalnewstoday.com/content/images/articles/322/322868/golden-retriever-puppy.jpg'}} height={36} width={36} />
+     <ListItem.Content>
+       <ListItem.Title style={{color:'black', fontSize: 18}}>{item.breed.toUpperCase()}</ListItem.Title>
+       <ListItem.Subtitle style={{color: 'black'}}>{item.country}</ListItem.Subtitle>
+     </ListItem.Content>
+   </ListItem>
     </View>
   );
+
+
+  componentDidMount(){
+    this.fetchItem()
+  }
+
+  render(){
+    return(
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fbb03c' }}>
+      <FlatList
+        removeClippedSubviews={true}
+        data={this.state.data}
+        renderItem={item => this.renderCats(item)}
+      />
+    </SafeAreaView>
+      )
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
