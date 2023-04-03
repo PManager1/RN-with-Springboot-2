@@ -11,6 +11,10 @@ import TestScreen from  './screens/TestScreen.js'
 
 
 import MainScreen from  './screens/MainScreen.js'
+import AllRecords from  './screens/AllRecords.js'
+
+import FlatListSearch from  './screens/FlatListSearch.js'
+
 
 
 function DetailsScreen() {
@@ -42,6 +46,18 @@ function HomeScreen({ navigation }) {
                     onPress={() => navigation.navigate('MainScreen')}
                   />
 
+
+      <Button
+                    title="Go to AllRecords "
+                    onPress={() => navigation.navigate('AllRecords')}
+                  />
+
+      <Button
+                    title="Go to FlatListSearch "
+                    onPress={() => navigation.navigate('FlatListSearch')}
+                  />
+
+
     </View>
   );
 }
@@ -68,6 +84,9 @@ function HomeStackScreen() {
 
       <HomeStack.Screen name="TestScreen" component={TestScreen} />
       <HomeStack.Screen name="MainScreen" component={MainScreen} />
+      <HomeStack.Screen name="AllRecords" component={AllRecords} />
+      <HomeStack.Screen name="FlatListSearch" component={FlatListSearch} />
+      
       
     </HomeStack.Navigator>
   );
