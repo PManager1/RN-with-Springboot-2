@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import  { useState } from "react";
@@ -20,7 +22,7 @@ import {
 const DATA = [
   {
     id: 'bd7acbea-c1b1-456c2-aed5-3ad53abb28ba',
-    title: 'All Records',
+    title: 'Fred P. Viener',
     linkscreen: 'AllRecords',
   },
   {
@@ -114,7 +116,7 @@ const DATA = [
 
 
 
-const MainScreen=( props )=>
+const AllRecords=( props )=>
 
 {
 
@@ -184,7 +186,7 @@ const MainScreen=( props )=>
   );;
 }
  
-export default MainScreen;
+export default AllRecords;
 
 
 
